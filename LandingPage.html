@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FADE MASTERS</title>
+    
+    <!-- Fonturi Google pentru Montserrat și Libre Baskerville -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Libre+Baskerville:wght@400;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-image: url('FM LP background.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
+            min-height: 100vh;
+            width: 100%;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Navigație - cu Montserrat */
+        .navigation {
+            position: absolute;
+            top: 30px;
+            left: 0;
+            right: 0;
+            text-align: center;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 150px;
+        }
+
+        .nav-links li a {
+            color: white;
+            text-decoration: none;
+            font-size: 30px;
+            font-weight: 600; /* Semi-bold */
+            letter-spacing: 1.5px;
+            text-transform: none;
+            padding: 10px 0;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .nav-links li a:hover {
+            opacity: 0.8;
+            transform: translateY(-2px);
+            transition: all 0.3s ease;
+        }
+
+        /* Conținut central - cu Libre Baskerville */
+        .main-content {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            flex: 1;
+            min-height: 100vh;
+            text-align: center;
+        }
+
+        .title-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .title-line-1 {
+            font-size: 75px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-family: 'Libre Baskerville', serif;
+            line-height: 1;
+            margin-bottom: 0;
+        }
+
+        .title-line-2 {
+            font-size: 75px;
+            font-weight: 700;
+            letter-spacing: 3px;
+            font-family: 'Libre Baskerville', serif;
+            line-height: 1;
+            margin-top: 0;
+        }
+
+        .subtitle {
+            font-size: 20px;
+            font-weight: 300;
+            letter-spacing: 2px;
+            opacity: 0.9;
+            font-family: 'Montserrat', sans-serif;
+            max-width: 500px;
+            line-height: 1.5;
+            margin-top: 25px;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigație -->
+    <nav class="navigation">
+        <ul class="nav-links">
+            <li><a href="#">Despre noi</a></li>
+            <li><a href="#">Servicii</a></li>
+            <li><a href="#">Shop</a></li>
+            <li><a href="#">Programeaza-te</a></li>
+        </ul>
+    </nav>
+
+    <!-- Conținut central -->
+    <main class="main-content">
+        <div class="title-container">
+            <div class="title-line-1">FADE</div>
+            <div class="title-line-2">MASTERS</div>
+        </div>
+        <p class="subtitle">Maestri ai fade-ului, creatori de stil.</p>
+    </main>
+</body>
+</html>
