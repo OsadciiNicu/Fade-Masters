@@ -83,6 +83,169 @@
             transform: translateY(-2px);
         }
 
+        /* Icon coș de cumpărături */
+        .cart-icon {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background-color: #d4af37;
+            color: #0a0a0a;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            z-index: 1001;
+            transition: all 0.3s ease;
+        }
+
+        .cart-icon:hover {
+            background-color: #f1c84e;
+            transform: scale(1.1);
+        }
+
+        .cart-count {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background-color: #ff4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        /* Modal coș de cumpărături */
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 400px;
+            height: 100vh;
+            background-color: #111;
+            z-index: 1002;
+            padding: 20px;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+            overflow-y: auto;
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #d4af37;
+        }
+
+        .close-cart {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .cart-items {
+            margin-bottom: 20px;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #333;
+        }
+
+        .cart-item-info {
+            flex-grow: 1;
+        }
+
+        .cart-item-name {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+
+        .cart-item-price {
+            color: #d4af37;
+        }
+
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .quantity-btn {
+            background: #333;
+            border: none;
+            color: white;
+            width: 25px;
+            height: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .remove-item {
+            background: #ff4444;
+            border: none;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+
+        .cart-total {
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            margin: 20px 0;
+            padding-top: 20px;
+            border-top: 2px solid #d4af37;
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #d4af37;
+            color: #0a0a0a;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .checkout-btn:hover {
+            background-color: #f1c84e;
+        }
+
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1001;
+        }
+
+        /* Restul stilurilor rămân la fel până la footer */
+        /* ... (toate celelalte stiluri rămân neschimbate) ... */
+
         /* Hero Section */
         #hero {
             background-image: url('FM LP background.png');
@@ -367,6 +530,8 @@
             border-radius: 30px;
             transition: all 0.3s ease;
             font-size: 14px;
+            cursor: pointer;
+            border: none;
         }
 
         .produs-button:hover {
@@ -559,6 +724,10 @@
                 transform: translateX(-50%);
                 width: 80%;
             }
+
+            .cart-modal {
+                width: 100%;
+            }
         }
 
         @media (max-width: 768px) {
@@ -580,6 +749,14 @@
             
             .programare-container {
                 padding: 40px 20px;
+            }
+
+            .cart-icon {
+                top: 20px;
+                right: 20px;
+                width: 40px;
+                height: 40px;
+                font-size: 16px;
             }
         }
 
@@ -616,6 +793,28 @@
     </style>
 </head>
 <body>
+    <!-- Icon coș de cumpărături -->
+    <div class="cart-icon" onclick="toggleCart()">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
+
+    <!-- Modal coș de cumpărături -->
+    <div class="overlay" onclick="closeCart()"></div>
+    <div class="cart-modal">
+        <div class="cart-header">
+            <h2>Coșul tău</h2>
+            <button class="close-cart" onclick="closeCart()">&times;</button>
+        </div>
+        <div class="cart-items">
+            <!-- Items will be added here dynamically -->
+        </div>
+        <div class="cart-total">
+            Total: <span class="total-amount">0</span> Lei
+        </div>
+        <button class="checkout-btn" onclick="checkout()">Finalizează comanda</button>
+    </div>
+
     <!-- Navigație -->
     <nav class="navigation">
         <ul class="nav-links">
@@ -719,7 +918,7 @@
                     <h3 class="produs-title">Șampon pentru Bărbie</h3>
                     <p class="produs-desc">Șampon special formulat pentru îngrijirea bărbii, cu uleiuri naturale.</p>
                     <div class="produs-pret">45 Lei</div>
-                    <a href="#" class="produs-button">Cumpără acum</a>
+                    <button class="produs-button" onclick="addToCart('Șampon pentru Bărbie', 45)">Cumpără acum</button>
                 </div>
             </div>
             
@@ -731,7 +930,7 @@
                     <h3 class="produs-title">Ulei pentru Barbă</h3>
                     <p class="produs-desc">Ulei hidratant care menține barba moale și sănătoasă. Arome masculine.</p>
                     <div class="produs-pret">55 Lei</div>
-                    <a href="#" class="produs-button">Cumpără acum</a>
+                    <button class="produs-button" onclick="addToCart('Ulei pentru Barbă', 55)">Cumpără acum</button>
                 </div>
             </div>
             
@@ -743,7 +942,7 @@
                     <h3 class="produs-title">Pomadă pentru Păr</h3>
                     <p class="produs-desc">Pomadă cu textură mată sau lucioasă pentru styling de durată.</p>
                     <div class="produs-pret">40 Lei</div>
-                    <a href="#" class="produs-button">Cumpără acum</a>
+                    <button class="produs-button" onclick="addToCart('Pomadă pentru Păr', 40)">Cumpără acum</button>
                 </div>
             </div>
             
@@ -755,7 +954,7 @@
                     <h3 class="produs-title">Set de Îngrijire</h3>
                     <p class="produs-desc">Set complet pentru îngrijirea bărbii și părului. Perfect ca cadou.</p>
                     <div class="produs-pret">120 Lei</div>
-                    <a href="#" class="produs-button">Cumpără acum</a>
+                    <button class="produs-button" onclick="addToCart('Set de Îngrijire', 120)">Cumpără acum</button>
                 </div>
             </div>
         </div>
@@ -870,6 +1069,131 @@
     </footer>
 
     <script>
+        let cart = [];
+        let cartCount = 0;
+        let totalAmount = 0;
+
+        // Funcții pentru coș
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({
+                    name: name,
+                    price: price,
+                    quantity: 1
+                });
+            }
+            
+            updateCart();
+            showCartNotification();
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCart();
+        }
+
+        function updateQuantity(name, change) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity += change;
+                if (item.quantity <= 0) {
+                    removeFromCart(name);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        function updateCart() {
+            const cartItems = document.querySelector('.cart-items');
+            const cartCountElement = document.querySelector('.cart-count');
+            const totalAmountElement = document.querySelector('.total-amount');
+            
+            // Update cart items
+            cartItems.innerHTML = '';
+            cartCount = 0;
+            totalAmount = 0;
+            
+            cart.forEach(item => {
+                cartCount += item.quantity;
+                totalAmount += item.price * item.quantity;
+                
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <div class="cart-item-info">
+                        <div class="cart-item-name">${item.name}</div>
+                        <div class="cart-item-price">${item.price} Lei</div>
+                    </div>
+                    <div class="cart-item-quantity">
+                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', -1)">-</button>
+                        <span>${item.quantity}</span>
+                        <button class="quantity-btn" onclick="updateQuantity('${item.name}', 1)">+</button>
+                        <button class="remove-item" onclick="removeFromCart('${item.name}')">Șterge</button>
+                    </div>
+                `;
+                cartItems.appendChild(cartItem);
+            });
+            
+            // Update counters
+            cartCountElement.textContent = cartCount;
+            totalAmountElement.textContent = totalAmount;
+        }
+
+        function toggleCart() {
+            const cartModal = document.querySelector('.cart-modal');
+            const overlay = document.querySelector('.overlay');
+            
+            cartModal.style.display = cartModal.style.display === 'block' ? 'none' : 'block';
+            overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function closeCart() {
+            document.querySelector('.cart-modal').style.display = 'none';
+            document.querySelector('.overlay').style.display = 'none';
+        }
+
+        function showCartNotification() {
+            const cartIcon = document.querySelector('.cart-icon');
+            cartIcon.style.animation = 'bounce 0.5s';
+            setTimeout(() => {
+                cartIcon.style.animation = '';
+            }, 500);
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Coșul tău este gol!');
+                return;
+            }
+            
+            const orderDetails = cart.map(item => 
+                `${item.name} x${item.quantity} - ${item.price * item.quantity} Lei`
+            ).join('\n');
+            
+            alert(`Comandă finalizată!\n\nProduse:\n${orderDetails}\n\nTotal: ${totalAmount} Lei\n\nVă mulțumim pentru comandă!`);
+            
+            // Reset cart
+            cart = [];
+            updateCart();
+            closeCart();
+        }
+
+        // Adăugăm animația bounce
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes bounce {
+                0%, 20%, 60%, 100% { transform: translateY(0); }
+                40% { transform: translateY(-10px); }
+                80% { transform: translateY(-5px); }
+            }
+        `;
+        document.head.appendChild(style);
+
         // Efect de scroll pentru navigație
         window.addEventListener('scroll', function() {
             const navigation = document.querySelector('.navigation');
