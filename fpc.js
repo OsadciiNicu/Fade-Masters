@@ -1,9 +1,16 @@
- let cart = [];
+        // Debug simplu: pune false când nu mai ai nevoie
+        const DEBUG = true;
+        const log = (...args) => { if (DEBUG) console.log("[fpc]", ...args); };
+
+        log("loaded");
+
+        let cart = [];
         let cartCount = 0;
         let totalAmount = 0;
 
         // Funcții pentru coș
         function addToCart(name, price) {
+            log("addToCart", { name, price });
             const existingItem = cart.find(item => item.name === name);
             
             if (existingItem) {
@@ -21,11 +28,13 @@
         }
 
         function removeFromCart(name) {
+            log("removeFromCart", { name });
             cart = cart.filter(item => item.name !== name);
             updateCart();
         }
 
         function updateQuantity(name, change) {
+            log("updateQuantity", { name, change });
             const item = cart.find(item => item.name === name);
             if (item) {
                 item.quantity += change;
@@ -41,6 +50,15 @@
             const cartItems = document.querySelector('.cart-items');
             const cartCountElement = document.querySelector('.cart-count');
             const totalAmountElement = document.querySelector('.total-amount');
+
+            if (!cartItems || !cartCountElement || !totalAmountElement) {
+                log("updateCart: lipsesc elemente din DOM", {
+                    cartItems: !!cartItems,
+                    cartCountElement: !!cartCountElement,
+                    totalAmountElement: !!totalAmountElement
+                });
+                return;
+            }
             
             // Update cart items
             cartItems.innerHTML = '';
@@ -71,9 +89,11 @@
             // Update counters
             cartCountElement.textContent = cartCount;
             totalAmountElement.textContent = totalAmount;
+            log("updateCart: ok", { cartCount, totalAmount, items: cart.length });
         }
 
         function toggleCart() {
+            log("toggleCart");
             const cartModal = document.querySelector('.cart-modal');
             const overlay = document.querySelector('.overlay');
             
@@ -82,11 +102,13 @@
         }
 
         function closeCart() {
+            log("closeCart");
             document.querySelector('.cart-modal').style.display = 'none';
             document.querySelector('.overlay').style.display = 'none';
         }
 
         function showCartNotification() {
+            log("showCartNotification");
             const cartIcon = document.querySelector('.cart-icon');
             cartIcon.style.animation = 'bounce 0.5s';
             setTimeout(() => {
@@ -95,6 +117,7 @@
         }
 
         function checkout() {
+            log("checkout");
             if (cart.length === 0) {
                 alert('Coșul tău este gol!');
                 return;
