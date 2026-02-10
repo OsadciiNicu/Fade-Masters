@@ -819,10 +819,7 @@
     <!-- Navigație -->
     <nav class="navigation">
         <ul class="nav-links">
-            <li><a href="#despre-noi">Despre noi</a></li>
-            <li><a href="#servicii">Servicii</a></li>
-            <li><a href="#shop">Shop</a></li>
-            <li><a href="#programare">Programeaza-te</a></li>
+            <!-- Populat din content.json -->
         </ul>
     </nav>
 
@@ -830,27 +827,20 @@
     <section id="hero">
         <div class="hero-content">
             <div class="title-container">
-                <div class="title-line-1">FADE</div>
-                <div class="title-line-2">MASTERS</div>
+                <div class="title-line-1"></div>
+                <div class="title-line-2"></div>
             </div>
-            <p class="subtitle">Maestri ai fade-ului, creatori de stil.</p>
-            <a href="#programare" class="cta-button">Programează-te acum</a>
+            <p class="subtitle"></p>
+            <a href="#" class="cta-button"></a>
         </div>
     </section>
 
     <!-- Secțiune Despre Noi -->
     <section id="despre-noi">
         <div class="despre-content">
-            <h2 class="section-title">Despre Noi</h2>
-            <p class="despre-text">
-                FADE MASTERS este mai mult decât un simplu barbershop - este o comunitate de bărbați care apreciază stilul și profesionalismul. 
-                Cu peste 10 ani de experiență în industria frizeriei, echipa noastră de maestri aduce o abordare modernă și rafinată tunsorilor clasice.
-            </p>
-            <p class="despre-text">
-                Fiecare vizită la FADE MASTERS este o experiență personalizată, unde atenția la detalii și calitatea serviciilor sunt prioritare. 
-                Ne mândrim cu abilitatea de a crea tunsori perfecte care se potrivesc personalității și stilului de viață al fiecărui client.
-            </p>
-            <a href="#servicii" class="cta-button">Vezi serviciile noastre</a>
+            <h2 class="section-title"></h2>
+            <div class="despre-text-container"></div>
+            <a href="#" class="cta-button"></a>
         </div>
         <div class="despre-image">
             <!-- Imaginea Unsplash a fost adăugată ca background-image în CSS -->
@@ -859,113 +849,25 @@
 
     <!-- Secțiune Servicii -->
     <section id="servicii">
-        <h2 class="section-title">Serviciile Noastre</h2>
+        <h2 class="section-title"></h2>
         <div class="servicii-container">
-            <div class="serviciu-card">
-                <div class="serviciu-icon">
-                    <i class="fas fa-cut"></i>
-                </div>
-                <h3 class="serviciu-title">Tuns Clasic</h3>
-                <p class="serviciu-desc">
-                    Tunsori tradiționale și moderne adaptate preferințelor tale. Include spălare și styling final.
-                </p>
-                <div class="serviciu-pret">100 Lei</div>
-            </div>
-            
-            <div class="serviciu-card">
-                <div class="serviciu-icon">
-                    <i class="fas fa-magic"></i>
-                </div>
-                <h3 class="serviciu-title">Fade Perfecționat</h3>
-                <p class="serviciu-desc">
-                    Tehnici avansate de fade pentru un rezultat impecabil. Includem și conturarea bărbii.
-                </p>
-                <div class="serviciu-pret">150 Lei</div>
-            </div>
-            
-            <div class="serviciu-card">
-                <div class="serviciu-icon">
-                    <i class="fas fa-palette"></i>
-                </div>
-                <h3 class="serviciu-title">Barbă și Mustață</h3>
-                <p class="serviciu-desc">
-                    Conturare, modelare și întreținere profesională a bărbii și mustății. Include tratament hidratant.
-                </p>
-                <div class="serviciu-pret">80 Lei</div>
-            </div>
-            
-            <div class="serviciu-card">
-                <div class="serviciu-icon">
-                    <i class="fas fa-spa"></i>
-                </div>
-                <h3 class="serviciu-title">Tratament Facial</h3>
-                <p class="serviciu-desc">
-                    Experiență completă de îngrijire a feței cu exfoliere, mască și masaj relaxant.
-                </p>
-                <div class="serviciu-pret">120 Lei</div>
-            </div>
+            <!-- Populat din content.json -->
         </div>
     </section>
 
     <!-- Secțiune Shop -->
     <section id="shop">
-        <h2 class="section-title">Magazin Online</h2>
+        <h2 class="section-title"></h2>
         <div class="produse-container">
-            <div class="produs-card">
-                <div class="produs-image">
-                    <i class="fas fa-pump-soap"></i>
-                </div>
-                <div class="produs-info">
-                    <h3 class="produs-title">Șampon pentru Bărbie</h3>
-                    <p class="produs-desc">Șampon special formulat pentru îngrijirea bărbii, cu uleiuri naturale.</p>
-                    <div class="produs-pret">45 Lei</div>
-                    <button class="produs-button" onclick="addToCart('Șampon pentru Bărbie', 45)">Cumpără acum</button>
-                </div>
-            </div>
-            
-            <div class="produs-card">
-                <div class="produs-image">
-                    <i class="fas fa-oil-can"></i>
-                </div>
-                <div class="produs-info">
-                    <h3 class="produs-title">Ulei pentru Barbă</h3>
-                    <p class="produs-desc">Ulei hidratant care menține barba moale și sănătoasă. Arome masculine.</p>
-                    <div class="produs-pret">55 Lei</div>
-                    <button class="produs-button" onclick="addToCart('Ulei pentru Barbă', 55)">Cumpără acum</button>
-                </div>
-            </div>
-            
-            <div class="produs-card">
-                <div class="produs-image">
-                    <i class="fas fa-paste"></i>
-                </div>
-                <div class="produs-info">
-                    <h3 class="produs-title">Pomadă pentru Păr</h3>
-                    <p class="produs-desc">Pomadă cu textură mată sau lucioasă pentru styling de durată.</p>
-                    <div class="produs-pret">40 Lei</div>
-                    <button class="produs-button" onclick="addToCart('Pomadă pentru Păr', 40)">Cumpără acum</button>
-                </div>
-            </div>
-            
-            <div class="produs-card">
-                <div class="produs-image">
-                    <i class="fas fa-gift"></i>
-                </div>
-                <div class="produs-info">
-                    <h3 class="produs-title">Set de Îngrijire</h3>
-                    <p class="produs-desc">Set complet pentru îngrijirea bărbii și părului. Perfect ca cadou.</p>
-                    <div class="produs-pret">120 Lei</div>
-                    <button class="produs-button" onclick="addToCart('Set de Îngrijire', 120)">Cumpără acum</button>
-                </div>
-            </div>
+            <!-- Populat din content.json -->
         </div>
     </section>
 
     <!-- Secțiune Programare -->
     <section id="programare">
-        <h2 class="section-title">Programează-te</h2>
+        <h2 class="section-title"></h2>
         <div class="programare-container">
-            <p class="subtitle">Completează formularul de mai jos pentru a-ți rezerva o programare. Te vom contacta în cel mai scurt timp pentru confirmare.</p>
+            <p class="subtitle"></p>
             
             <form class="programare-form">
                 <div class="form-group">
@@ -987,11 +889,6 @@
                     <label for="serviciu">Serviciu Dorit</label>
                     <select id="serviciu" name="serviciu" required>
                         <option value="">Selectează un serviciu</option>
-                        <option value="tuns-clasic">Tuns Clasic - 100 Lei</option>
-                        <option value="fade-perfectionat">Fade Perfecționat - 150 Lei</option>
-                        <option value="barba-mustata">Barbă și Mustață - 80 Lei</option>
-                        <option value="tratament-facial">Tratament Facial - 120 Lei</option>
-                        <option value="complet">Serviciu Complet - 200 Lei</option>
                     </select>
                 </div>
                 
@@ -1004,16 +901,6 @@
                     <label for="ora">Ora Preferată</label>
                     <select id="ora" name="ora" required>
                         <option value="">Selectează o oră</option>
-                        <option value="09:00">09:00</option>
-                        <option value="10:00">10:00</option>
-                        <option value="11:00">11:00</option>
-                        <option value="12:00">12:00</option>
-                        <option value="13:00">13:00</option>
-                        <option value="14:00">14:00</option>
-                        <option value="15:00">15:00</option>
-                        <option value="16:00">16:00</option>
-                        <option value="17:00">17:00</option>
-                        <option value="18:00">18:00</option>
                     </select>
                 </div>
                 
@@ -1030,45 +917,23 @@
     <!-- Footer -->
     <footer>
         <div class="footer-content">
-            <div class="footer-logo">FADE MASTERS</div>
+            <div class="footer-logo"></div>
             
             <div class="footer-info">
-                <div class="footer-column">
-                    <h3>Contact</h3>
-                    <p><i class="fas fa-map-marker-alt"></i> Strada Exemplu nr. 123, Chișinău</p>
-                    <p><i class="fas fa-phone"></i> +373 123 456 78</p>
-                    <p><i class="fas fa-envelope"></i> contact@fademasters.md</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Program</h3>
-                    <p>Luni - Vineri: 9:00 - 19:00</p>
-                    <p>Sâmbătă: 9:00 - 17:00</p>
-                    <p>Duminică: Închis</p>
-                </div>
-                
-                <div class="footer-column">
-                    <h3>Link-uri Rapide</h3>
-                    <a href="#despre-noi">Despre Noi</a>
-                    <a href="#servicii">Servicii</a>
-                    <a href="#shop">Shop</a>
-                    <a href="#programare">Programare</a>
-                </div>
+                <!-- Populat din content.json -->
             </div>
             
             <div class="social-icons">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
-                <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-tiktok"></i></a>
-                <a href="#"><i class="fab fa-whatsapp"></i></a>
+                <!-- Populat din content.json -->
             </div>
             
             <div class="copyright">
-                &copy; 2023 FADE MASTERS. Toate drepturile rezervate.
+                
             </div>
         </div>
     </footer>
 
+    <script src="app.js"></script>
     <script src="fpc.js"></script>
     
 </body>

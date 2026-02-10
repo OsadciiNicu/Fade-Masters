@@ -1,0 +1,149 @@
+{
+  "site": {
+    "title": "FADE MASTERS"
+  },
+  "navigation": {
+    "links": [
+      { "label": "Despre noi", "href": "#despre-noi" },
+      { "label": "Servicii", "href": "#servicii" },
+      { "label": "Shop", "href": "#shop" },
+      { "label": "Programeaza-te", "href": "#programare" }
+    ]
+  },
+  "hero": {
+    "backgroundImage": "FM LP background.png",
+    "titleLine1": "FADE",
+    "titleLine2": "MASTERS",
+    "subtitle": "Maestri ai fade-ului, creatori de stil.",
+    "cta": { "label": "Programează-te acum", "href": "#programare" }
+  },
+  "about": {
+    "title": "Despre Noi",
+    "paragraphs": [
+      "FADE MASTERS este mai mult decât un simplu barbershop - este o comunitate de bărbați care apreciază stilul și profesionalismul. Cu peste 10 ani de experiență în industria frizeriei, echipa noastră de maestri aduce o abordare modernă și rafinată tunsorilor clasice.",
+      "Fiecare vizită la FADE MASTERS este o experiență personalizată, unde atenția la detalii și calitatea serviciilor sunt prioritare. Ne mândrim cu abilitatea de a crea tunsori perfecte care se potrivesc personalității și stilului de viață al fiecărui client."
+    ],
+    "cta": { "label": "Vezi serviciile noastre", "href": "#servicii" },
+    "image": {
+      "backgroundImage": "https://images.unsplash.com/photo-1567894340315-735d7c361db0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHx8"
+    }
+  },
+  "services": {
+    "title": "Serviciile Noastre",
+    "items": [
+      {
+        "iconClass": "fas fa-cut",
+        "title": "Tuns Clasic",
+        "description": "Tunsori tradiționale și moderne adaptate preferințelor tale. Include spălare și styling final.",
+        "priceLabel": "100 Lei"
+      },
+      {
+        "iconClass": "fas fa-magic",
+        "title": "Fade Perfecționat",
+        "description": "Tehnici avansate de fade pentru un rezultat impecabil. Includem și conturarea bărbii.",
+        "priceLabel": "150 Lei"
+      },
+      {
+        "iconClass": "fas fa-palette",
+        "title": "Barbă și Mustață",
+        "description": "Conturare, modelare și întreținere profesională a bărbii și mustății. Include tratament hidratant.",
+        "priceLabel": "80 Lei"
+      },
+      {
+        "iconClass": "fas fa-spa",
+        "title": "Tratament Facial",
+        "description": "Experiență completă de îngrijire a feței cu exfoliere, mască și masaj relaxant.",
+        "priceLabel": "120 Lei"
+      }
+    ]
+  },
+  "shop": {
+    "title": "Magazin Online",
+    "products": [
+      {
+        "name": "Șampon pentru Bărbie",
+        "description": "Șampon special formulat pentru îngrijirea bărbii, cu uleiuri naturale.",
+        "price": 45,
+        "iconClass": "fas fa-pump-soap"
+      },
+      {
+        "name": "Ulei pentru Barbă",
+        "description": "Ulei hidratant care menține barba moale și sănătoasă. Arome masculine.",
+        "price": 55,
+        "iconClass": "fas fa-oil-can"
+      },
+      {
+        "name": "Pomadă pentru Păr",
+        "description": "Pomadă cu textură mată sau lucioasă pentru styling de durată.",
+        "price": 40,
+        "iconClass": "fas fa-paste"
+      },
+      {
+        "name": "Set de Îngrijire",
+        "description": "Set complet pentru îngrijirea bărbii și părului. Perfect ca cadou.",
+        "price": 120,
+        "iconClass": "fas fa-gift"
+      }
+    ]
+  },
+  "booking": {
+    "title": "Programează-te",
+    "subtitle": "Completează formularul de mai jos pentru a-ți rezerva o programare. Te vom contacta în cel mai scurt timp pentru confirmare.",
+    "serviceOptions": [
+      { "value": "tuns-clasic", "label": "Tuns Clasic - 100 Lei" },
+      { "value": "fade-perfectionat", "label": "Fade Perfecționat - 150 Lei" },
+      { "value": "barba-mustata", "label": "Barbă și Mustață - 80 Lei" },
+      { "value": "tratament-facial", "label": "Tratament Facial - 120 Lei" },
+      { "value": "complet", "label": "Serviciu Complet - 200 Lei" }
+    ],
+    "timeOptions": [
+      "09:00",
+      "10:00",
+      "11:00",
+      "12:00",
+      "13:00",
+      "14:00",
+      "15:00",
+      "16:00",
+      "17:00",
+      "18:00"
+    ]
+  },
+  "footer": {
+    "logo": "FADE MASTERS",
+    "columns": [
+      {
+        "title": "Contact",
+        "items": [
+          { "type": "text", "html": "<i class=\"fas fa-map-marker-alt\"></i> Strada Exemplu nr. 123, Chișinău" },
+          { "type": "text", "html": "<i class=\"fas fa-phone\"></i> +373 123 456 78" },
+          { "type": "text", "html": "<i class=\"fas fa-envelope\"></i> contact@fademasters.md" }
+        ]
+      },
+      {
+        "title": "Program",
+        "items": [
+          { "type": "text", "html": "Luni - Vineri: 9:00 - 19:00" },
+          { "type": "text", "html": "Sâmbătă: 9:00 - 17:00" },
+          { "type": "text", "html": "Duminică: Închis" }
+        ]
+      },
+      {
+        "title": "Link-uri Rapide",
+        "items": [
+          { "type": "link", "label": "Despre Noi", "href": "#despre-noi" },
+          { "type": "link", "label": "Servicii", "href": "#servicii" },
+          { "type": "link", "label": "Shop", "href": "#shop" },
+          { "type": "link", "label": "Programare", "href": "#programare" }
+        ]
+      }
+    ],
+    "socialLinks": [
+      { "href": "#", "iconClass": "fab fa-facebook-f" },
+      { "href": "#", "iconClass": "fab fa-instagram" },
+      { "href": "#", "iconClass": "fab fa-tiktok" },
+      { "href": "#", "iconClass": "fab fa-whatsapp" }
+    ],
+    "copyright": "© 2023 FADE MASTERS. Toate drepturile rezervate."
+  }
+}

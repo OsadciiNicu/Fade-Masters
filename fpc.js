@@ -151,9 +151,15 @@
         }, observerOptions);
 
         // Aplică animația pentru carduri și alte elemente
-        document.querySelectorAll('.serviciu-card, .produs-card, .despre-content, .despre-image').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-            observer.observe(el);
-        });
+        function observeAnimatedElements() {
+            document.querySelectorAll('.serviciu-card, .produs-card, .despre-content, .despre-image').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                observer.observe(el);
+            });
+        }
+
+        // expunem funcția ca să o poți apela după ce randezi din JSON
+        window.observeAnimatedElements = observeAnimatedElements;
+        observeAnimatedElements();
