@@ -153,6 +153,33 @@ function renderFooter(footerData) {
   safeText(document.querySelector("footer .copyright"), footerData && footerData.copyright);
 }
 
+// Funcție pentru imagine random în Despre Noi
+function setRandomAboutImage() {
+  // Array cu poze de frizerii - doar cele care funcționează
+  // Eliminate: poza cu sala (1503951914875) și poza gri (1532710093735)
+  const barberImages = [
+    "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1621605815971-fbc98d665033?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1622286342621-4bd786c2447c?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1567894340315-735d7c361db0?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1yZWxhdGVkfDEwfHx8ZW58MHx8fHx8"
+  ];
+
+  // Alege o poză random
+  const randomIndex = Math.floor(Math.random() * barberImages.length);
+  const selectedImage = barberImages[randomIndex];
+  
+  console.log("Random barber image for Despre Noi:", selectedImage);
+  
+  // Setează imaginea pentru secțiunea Despre Noi
+  const despreImage = document.querySelector('#despre-noi .despre-image');
+  if (despreImage) {
+    despreImage.style.backgroundImage = `url('${selectedImage}')`;
+    despreImage.style.backgroundSize = 'cover';
+    despreImage.style.backgroundPosition = 'center';
+  }
+}
+
 async function loadContent() {
   const res = await fetch("content.json", { cache: "no-store" });
   if (!res.ok) throw new Error(`Nu pot încărca content.json (${res.status})`);
@@ -197,7 +224,8 @@ async function loadContent() {
     aboutCta.href = (data && data.about && data.about.cta && data.about.cta.href) ? data.about.cta.href : "#";
   }
 
-  setBackgroundImage(document.querySelector("#despre-noi .despre-image"), data && data.about && data.about.image && data.about.image.backgroundImage);
+  // APEL FUNCȚIA PENTRU IMAGINE RANDOM (suprascrie ce e în JSON)
+  setRandomAboutImage();
 
   // SERVICES + SHOP + BOOKING + FOOTER
   renderServices(data.services);
@@ -216,4 +244,3 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error(err);
   });
 });
-
