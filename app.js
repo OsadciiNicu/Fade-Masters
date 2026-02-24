@@ -156,7 +156,6 @@ function renderFooter(footerData) {
 // Funcție pentru imagine random în Despre Noi
 function setRandomAboutImage() {
   // Array cu poze de frizerii - doar cele care funcționează
-  // Eliminate: poza cu sala (1503951914875) și poza gri (1532710093735)
   const barberImages = [
     "https://images.unsplash.com/photo-1585747860715-2ba37e788b70?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
     "https://images.unsplash.com/photo-1599351431202-1e0f0137899a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80",
@@ -177,6 +176,83 @@ function setRandomAboutImage() {
     despreImage.style.backgroundImage = `url('${selectedImage}')`;
     despreImage.style.backgroundSize = 'cover';
     despreImage.style.backgroundPosition = 'center';
+  }
+}
+
+// FUNCȚIE NOUĂ - Clientul lunii (input simplu)
+function setupClientInput() {
+  // Verificăm dacă există deja
+  if (document.getElementById('client-input-container')) return;
+  
+  // Creăm containerul
+  const container = document.createElement('div');
+  container.id = 'client-input-container';
+  container.style.margin = '40px auto';
+  container.style.maxWidth = '500px';
+  container.style.padding = '25px';
+  container.style.backgroundColor = '#111';
+  container.style.borderRadius = '10px';
+  container.style.border = '1px solid #d4af37';
+  container.style.textAlign = 'center';
+  
+  // Titlu
+  const title = document.createElement('h3');
+  title.textContent = 'Clientul lunii';
+  title.style.color = '#d4af37';
+  title.style.fontFamily = 'Libre Baskerville, serif';
+  title.style.marginBottom = '15px';
+  title.style.fontSize = '24px';
+  
+  // Input
+  const input = document.createElement('input');
+  input.type = 'text';
+  input.placeholder = 'Scrie numele tău...';
+  input.style.width = '100%';
+  input.style.padding = '12px';
+  input.style.marginBottom = '15px';
+  input.style.backgroundColor = '#1a1a1a';
+  input.style.border = '1px solid #333';
+  input.style.color = 'white';
+  input.style.borderRadius = '5px';
+  input.style.fontSize = '16px';
+  
+  // Mesaj
+  const message = document.createElement('div');
+  message.id = 'client-message';
+  message.style.padding = '15px';
+  message.style.backgroundColor = '#1a1a1a';
+  message.style.borderRadius = '5px';
+  message.style.borderLeft = '4px solid #d4af37';
+  message.style.minHeight = '50px';
+  message.style.fontSize = '16px';
+  message.style.display = 'flex';
+  message.style.alignItems = 'center';
+  message.style.justifyContent = 'center';
+  
+  // Eveniment
+  input.addEventListener('input', function(e) {
+    const nume = e.target.value.trim();
+    if (nume === '') {
+      message.textContent = '';
+      message.style.borderLeftColor = '#d4af37';
+    } else {
+      message.textContent = `🏆 ${nume} este clientul lunii la FADE MASTERS!`;
+      message.style.borderLeftColor = '#d4af37';
+    }
+  });
+  
+  // Asamblăm
+  container.appendChild(title);
+  container.appendChild(input);
+  container.appendChild(message);
+  
+  // Adăugăm în pagină după "Despre Noi"
+  const despreNoi = document.getElementById('despre-noi');
+  if (despreNoi) {
+    despreNoi.parentNode.insertBefore(container, despreNoi.nextSibling);
+  } else {
+    // Dacă nu găsește, adaugă la sfârșitul body
+    document.body.appendChild(container);
   }
 }
 
@@ -226,6 +302,9 @@ async function loadContent() {
 
   // APEL FUNCȚIA PENTRU IMAGINE RANDOM (suprascrie ce e în JSON)
   setRandomAboutImage();
+  
+  // APEL FUNCȚIA NOUĂ PENTRU INPUT
+  setupClientInput();
 
   // SERVICES + SHOP + BOOKING + FOOTER
   renderServices(data.services);
