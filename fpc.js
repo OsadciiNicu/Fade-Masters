@@ -121,6 +121,116 @@ function observeAnimatedElements() {
     });
 }
 
+// ===== API VREME - OPEN-METEO (FĂRĂ CHEIE, GRATUIT) =====
+
+function displayWeather() {
+    // Coordonate Chișinău: latitudine 47.01, longitudine 28.86
+    fetch('https://api.open-meteo.com/v1/forecast?latitude=47.01&longitude=28.86&current_weather=true&hourly=temperature_2m&timezone=auto')
+        .then(response => response.json())
+        .then(data => {
+            console.log('Date meteo Open-Meteo:', data);
+            
+            // Extrage datele curente
+            const temp = Math.round(data.current_weather.temperature);
+            const wind = data.current_weather.windspeed;
+            const code = data.current_weather.weathercode;
+            
+            // Dicționar pentru codurile meteo Open-Meteo
+            const weatherDescriptions = {
+                0: '☀️ Senin',
+                1: '🌤️ Mai mult senin',
+                2: '⛅ Parțial noros',
+                3: '☁️ Înnorat',
+                45: '🌫️ Ceață',
+                48: '🌫️ Ceață depusă',
+                51: '🌧️ Burniță ușoară',
+                53: '🌧️ Burniță moderată',
+                55: '🌧️ Burniță densă',
+                56: '🌧️ Burniță înghețată ușoară',
+                57: '🌧️ Burniță înghețată densă',
+                61: '🌧️ Ploaie ușoară',
+                63: '🌧️ Ploaie moderată',
+                65: '🌧️ Ploaie puternică',
+                66: '🌧️ Ploaie înghețată ușoară',
+                67: '🌧️ Ploaie înghețată puternică',
+                71: '❄️ Ninsoare ușoară',
+                73: '❄️ Ninsoare moderată',
+                75: '❄️ Ninsoare puternică',
+                77: '❄️ Grindină',
+                80: '🌧️ Averse ușoare',
+                81: '🌧️ Averse moderate',
+                82: '🌧️ Averse violente',
+                85: '❄️ Averse de zăpadă ușoare',
+                86: '❄️ Averse de zăpadă puternice',
+                95: '⛈️ Furtună',
+                96: '⛈️ Furtună cu grindină ușoară',
+                99: '⛈️ Furtună cu grindină puternică'
+            };
+            
+            const description = weatherDescriptions[code] || '🌡️ Vreme variabilă';
+            
+            // Creează elementul pentru vreme dacă nu există
+            let weatherDiv = document.getElementById('weather-info');
+            if (!weatherDiv) {
+                weatherDiv = document.createElement('div');
+                weatherDiv.id = 'weather-info';
+                weatherDiv.style.position = 'fixed';
+                weatherDiv.style.top = '100px';
+                weatherDiv.style.right = '30px';
+                weatherDiv.style.backgroundColor = '#d4af37';
+                weatherDiv.style.color = '#0a0a0a';
+                weatherDiv.style.padding = '12px 18px';
+                weatherDiv.style.borderRadius = '8px';
+                weatherDiv.style.fontWeight = '500';
+                weatherDiv.style.zIndex = '999';
+                weatherDiv.style.boxShadow = '0 4px 15px rgba(0,0,0,0.3)';
+                weatherDiv.style.fontSize = '14px';
+                weatherDiv.style.minWidth = '200px';
+                document.body.appendChild(weatherDiv);
+            }
+            
+            // Afișează vremea frumos
+            weatherDiv.innerHTML = `
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px; border-bottom:1px solid rgba(0,0,0,0.1); padding-bottom:8px;">
+                    <span style="font-size:28px;">${description.split(' ')[0]}</span>
+                    <span style="font-size:20px; font-weight:bold;">${temp}°C</span>
+                </div>
+                <div style="margin-bottom:5px; text-align:center;">
+                    <span style="text-transform:capitalize;">${description}</span>
+                </div>
+                <div style="display:flex; align-items:center; justify-content:center; gap:10px;">
+                    <span style="font-size:16px;">💨</span>
+                    <span>Vânt: ${wind} km/h</span>
+                </div>
+                <div style="margin-top:8px; font-size:11px; text-align:center; color:#333; border-top:1px solid rgba(0,0,0,0.1); padding-top:6px;">
+                    Chișinău • actualizat acum
+                </div>
+            `;
+            
+            console.log('✅ Vreme afișată:', temp + '°C', description);
+        })
+        .catch(error => {
+            console.error('❌ Eroare la încărcarea vremii:', error);
+            
+            // Afișează un mesaj de eroare prietenos
+            let weatherDiv = document.getElementById('weather-info');
+            if (!weatherDiv) {
+                weatherDiv = document.createElement('div');
+                weatherDiv.id = 'weather-info';
+                weatherDiv.style.position = 'fixed';
+                weatherDiv.style.top = '100px';
+                weatherDiv.style.right = '30px';
+                weatherDiv.style.backgroundColor = '#d4af37';
+                weatherDiv.style.color = '#0a0a0a';
+                weatherDiv.style.padding = '12px 18px';
+                weatherDiv.style.borderRadius = '8px';
+                weatherDiv.style.zIndex = '999';
+                document.body.appendChild(weatherDiv);
+            }
+            weatherDiv.innerHTML = '🌡️ Vremea nu este disponibilă momentan';
+        });
+}
+
 // ===== ISTORIC PROGRAMĂRI =====
 
 // Încarcă istoricul din localStorage
@@ -146,6 +256,9 @@ function saveToHistory(bookingData) {
     
     localStorage.setItem('istoricProgramari', JSON.stringify(history));
     log('Programare salvată în istoric:', bookingData);
+    
+    // Actualizează afișarea în pagină
+    displayHistoryOnPage();
 }
 
 // Afișează istoricul în consolă
@@ -247,6 +360,9 @@ function saveOrderToHistory() {
     
     localStorage.setItem('istoricComenzi', JSON.stringify(history));
     log('Comandă salvată în istoric:', order);
+    
+    // Actualizează afișarea în pagină
+    displayHistoryOnPage();
 }
 
 // Afișează istoricul comenzilor în consolă
@@ -265,6 +381,197 @@ function showOrderHistory() {
             log(`   - ${p.nume} x${p.cantitate} = ${p.total} Lei`);
         });
     });
+}
+
+// ===== AFIȘARE ISTORIC ÎN PAGINĂ (MAI JOS DE PROGRAMARE) =====
+
+// Funcție pentru a crea secțiunea de istoric în pagină
+function createHistorySection() {
+    // Verifică dacă secțiunea există deja
+    if (document.getElementById('history-section')) return;
+    
+    // Creează secțiunea principală
+    const section = document.createElement('section');
+    section.id = 'history-section';
+    section.style.padding = '60px 20px';
+    section.style.backgroundColor = '#111';
+    section.style.textAlign = 'center';
+    
+    // Titlu secțiune
+    const title = document.createElement('h2');
+    title.className = 'section-title';
+    title.textContent = 'Istoricul tău';
+    title.style.marginBottom = '40px';
+    
+    // Container pentru istoric
+    const container = document.createElement('div');
+    container.id = 'history-container';
+    container.style.maxWidth = '1000px';
+    container.style.margin = '0 auto';
+    container.style.display = 'flex';
+    container.style.flexWrap = 'wrap';
+    container.style.gap = '30px';
+    container.style.justifyContent = 'center';
+    
+    // Coloana pentru programări
+    const bookingsColumn = document.createElement('div');
+    bookingsColumn.style.flex = '1 1 400px';
+    bookingsColumn.style.backgroundColor = '#1a1a1a';
+    bookingsColumn.style.borderRadius = '10px';
+    bookingsColumn.style.padding = '25px';
+    bookingsColumn.style.border = '1px solid #d4af37';
+    
+    const bookingsTitle = document.createElement('h3');
+    bookingsTitle.textContent = '📅 Programări recente';
+    bookingsTitle.style.color = '#d4af37';
+    bookingsTitle.style.marginBottom = '20px';
+    bookingsTitle.style.fontSize = '22px';
+    bookingsTitle.style.borderBottom = '1px solid #333';
+    bookingsTitle.style.paddingBottom = '10px';
+    
+    const bookingsList = document.createElement('div');
+    bookingsList.id = 'bookings-list';
+    bookingsList.style.minHeight = '100px';
+    
+    // Coloana pentru comenzi
+    const ordersColumn = document.createElement('div');
+    ordersColumn.style.flex = '1 1 400px';
+    ordersColumn.style.backgroundColor = '#1a1a1a';
+    ordersColumn.style.borderRadius = '10px';
+    ordersColumn.style.padding = '25px';
+    ordersColumn.style.border = '1px solid #d4af37';
+    
+    const ordersTitle = document.createElement('h3');
+    ordersTitle.textContent = '🛒 Comenzi recente';
+    ordersTitle.style.color = '#d4af37';
+    ordersTitle.style.marginBottom = '20px';
+    ordersTitle.style.fontSize = '22px';
+    ordersTitle.style.borderBottom = '1px solid #333';
+    ordersTitle.style.paddingBottom = '10px';
+    
+    const ordersList = document.createElement('div');
+    ordersList.id = 'orders-list';
+    ordersList.style.minHeight = '100px';
+    
+    // Asamblare
+    bookingsColumn.appendChild(bookingsTitle);
+    bookingsColumn.appendChild(bookingsList);
+    
+    ordersColumn.appendChild(ordersTitle);
+    ordersColumn.appendChild(ordersList);
+    
+    container.appendChild(bookingsColumn);
+    container.appendChild(ordersColumn);
+    
+    section.appendChild(title);
+    section.appendChild(container);
+    
+    // Adaugă secțiunea după Programare
+    const programareSection = document.getElementById('programare');
+    if (programareSection) {
+        programareSection.parentNode.insertBefore(section, programareSection.nextSibling);
+    } else {
+        document.body.appendChild(section);
+    }
+}
+
+// Funcție pentru a afișa programările în pagină
+function displayBookingsOnPage() {
+    const bookingsList = document.getElementById('bookings-list');
+    if (!bookingsList) return;
+    
+    const bookings = loadBookingHistory();
+    
+    if (bookings.length === 0) {
+        bookingsList.innerHTML = '<p style="color:#aaa; text-align:center; padding:20px;">Nu există programări încă.</p>';
+        return;
+    }
+    
+    bookingsList.innerHTML = '';
+    
+    // Afișează doar ultimele 5 programări
+    bookings.slice(0, 5).forEach(booking => {
+        const item = document.createElement('div');
+        item.style.marginBottom = '15px';
+        item.style.padding = '12px';
+        item.style.backgroundColor = '#0a0a0a';
+        item.style.borderRadius = '8px';
+        item.style.borderLeft = '3px solid #d4af37';
+        item.style.textAlign = 'left';
+        
+        const dataProgramare = booking.data ? `${booking.data} ${booking.ora}` : booking.dataProgramare;
+        
+        item.innerHTML = `
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <span style="color:#d4af37; font-weight:600;">${booking.nume}</span>
+                <span style="color:#aaa; font-size:12px;">${booking.dataProgramare || ''}</span>
+            </div>
+            <div style="color:#fff; font-size:14px; margin-bottom:5px;">${booking.serviciu}</div>
+            <div style="color:#aaa; font-size:12px;">📅 ${dataProgramare}</div>
+        `;
+        
+        bookingsList.appendChild(item);
+    });
+}
+
+// Funcție pentru a afișa comenzile în pagină
+function displayOrdersOnPage() {
+    const ordersList = document.getElementById('orders-list');
+    if (!ordersList) return;
+    
+    const orders = loadOrderHistory();
+    
+    if (orders.length === 0) {
+        ordersList.innerHTML = '<p style="color:#aaa; text-align:center; padding:20px;">Nu există comenzi încă.</p>';
+        return;
+    }
+    
+    ordersList.innerHTML = '';
+    
+    // Afișează doar ultimele 5 comenzi
+    orders.slice(0, 5).forEach(order => {
+        const item = document.createElement('div');
+        item.style.marginBottom = '15px';
+        item.style.padding = '12px';
+        item.style.backgroundColor = '#0a0a0a';
+        item.style.borderRadius = '8px';
+        item.style.borderLeft = '3px solid #d4af37';
+        item.style.textAlign = 'left';
+        
+        // Creează lista scurtă de produse
+        const produseShort = order.produse.slice(0, 2).map(p => 
+            `${p.nume} x${p.cantitate}`
+        ).join(', ');
+        
+        const extraProduse = order.produse.length > 2 ? ` +${order.produse.length - 2} produse` : '';
+        
+        item.innerHTML = `
+            <div style="display:flex; justify-content:space-between; margin-bottom:5px;">
+                <span style="color:#d4af37; font-weight:600;">Comandă #${order.dataComanda.slice(0,10)}</span>
+                <span style="color:#d4af37;">${order.totalComanda} Lei</span>
+            </div>
+            <div style="color:#fff; font-size:14px; margin-bottom:5px;">
+                ${produseShort}${extraProduse}
+            </div>
+            <div style="color:#aaa; font-size:12px;">
+                📦 ${order.numarProduse} produse • ${order.dataComanda}
+            </div>
+        `;
+        
+        ordersList.appendChild(item);
+    });
+}
+
+// Funcție principală pentru afișarea istoricului în pagină
+function displayHistoryOnPage() {
+    // Creează secțiunea dacă nu există (indiferent dacă sunt date sau nu)
+    if (!document.getElementById('history-section')) {
+        createHistorySection();
+    }
+    
+    // Afișează programările și comenzile
+    displayBookingsOnPage();
+    displayOrdersOnPage();
 }
 
 // ===== FUNCȚIE PENTRU A AFIȘA TOT ISTORICUL =====
@@ -287,10 +594,19 @@ window.addEventListener('load', function() {
     } else {
         log('Nu există programări sau comenzi salvate.');
     }
+    
+    // Afișează secțiunea de istoric (chiar dacă e goală)
+    displayHistoryOnPage();
+    
+    // Afișează vremea la încărcarea paginii
+    displayWeather();
+    
+    // Actualizează vremea la fiecare 30 minute
+    setInterval(displayWeather, 30 * 60 * 1000);
 });
 
 // Pentru a vedea istoricul oricând din consolă
 window.veziIstoric = showAllHistory;
 
-window.observeAnimatedElements = observeAnimatedElements;
+window.observeAnimatedElements = observeAnimateđElements;
 observeAnimatedElements();
